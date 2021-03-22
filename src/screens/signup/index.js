@@ -72,11 +72,11 @@ export default Signup = (props) => {
     };
     return (
         <SignupComponent
-            {...props}
             form={form}
             errors={erros}
             onSubmit={onSubmit}
             onChange={onChange}
+            {...props}
         />
     )
 };

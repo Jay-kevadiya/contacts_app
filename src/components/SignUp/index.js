@@ -5,8 +5,10 @@ import CustomButton from '../common/CustomButton';
 import Input from '../common/Input';
 import { LOGIN } from '../../constants/routeNames';
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
 
-export default SignupComponent = ({ props, onSubmit, onChange, errors, form }) => {
+export default SignupComponent = ({ onSubmit, onChange, errors, form }) => {
+    const navigation = useNavigation();
     return (
         <Container>
             <Image
@@ -87,7 +89,7 @@ export default SignupComponent = ({ props, onSubmit, onChange, errors, form }) =
 
                     <View style={styles.createSection}>
                         <Text style={styles.infoText}>Already have an account?</Text>
-                        <TouchableOpacity onPress={() => props.navigation.navigate(LOGIN)}>
+                        <TouchableOpacity onPress={() => navigation.navigate(LOGIN)}>
                             <Text style={styles.linkBtn}>Login</Text>
                         </TouchableOpacity>
                     </View>
