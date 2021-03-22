@@ -11,7 +11,7 @@ import Signup from '../screens/signup';
 
 const AuthNavigator = () => {
     const Stack = createStackNavigator();
-    return <Stack.Navigator>
+    return <Stack.Navigator screenOptions={{headerShown:false}}>
         <Stack.Screen name={LOGIN} component={Login} />
         <Stack.Screen name={SIGNUP} component={Signup} />
 

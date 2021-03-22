@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import AppNavContainer from './src/navigations';
-import GlobalProvider from './src/context/reducers/provider';
+import GlobalProvider from './src/context/provider';
 
 export default App = () => {
   return (
