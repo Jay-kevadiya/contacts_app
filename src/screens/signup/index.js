@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text } from 'react-native';
 import SignupComponent from '../../components/SignUp';
+import axiosInstance from '../../helpers/axiosInterceptor';
 
 export default Signup = (props) => {
 
     const [form, setForm] = useState({});
     const [erros, setErrors] = useState({});
+
+    useEffect(() => {
+        axiosInstance.post('/contact').catch(error => {
+            console.log('error', error);
+        });
+    }, [])
 
     const onChange = ({ name, value }) => {
         setForm({ ...form, [name]: value });

@@ -48,7 +48,7 @@ export default LoginComponent = (props) => {
                     <View style={styles.createSection}>
                         <Text style={styles.infoText}>Need a new account?</Text>
                         <TouchableOpacity onPress={() => props.navigation.navigate(SIGNUP)}>
-                            <Text style={styles.linkBtn}>Register</Text>
+                            <Text style={styles.linkBtn}>Sign Up</Text>
                         </TouchableOpacity>
                     </View>
 
