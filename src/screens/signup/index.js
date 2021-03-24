@@ -1,18 +1,32 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect, useContext, useCallback} from 'react';
 import { View, Text } from 'react-native';
 import SignupComponent from '../../components/SignUp';
-import axiosInstance from '../../helpers/axiosInterceptor';
+import  register,{clearAuthState} from '../../context/actions/auth/register';
+import { GlobalContext } from '../../context/provider';
+import axios from '../../helpers/axiosInterceptor';
+import {useNavigation,  useFocusEffect} from '@react-navigation/native';
+import { LOGIN } from '../../constants/routeNames';
 
 export default Signup = (props) => {
 
     const [form, setForm] = useState({});
-    const [erros, setErrors] = useState({});
+    const [errors, setErrors] = useState({});
+    const {authDispatch, authR:{error, loading, data}} = useContext(GlobalContext)
+    const {navigate} = useNavigation();
 
     useEffect(() => {
-        axiosInstance.post('/contact').catch(error => {
-            console.log('error', error);
-        });
-    }, [])
+        if(data){
+            navigate(LOGIN);
+        }
+    }, [data])
+
+    useFocusEffect(
+        useCallback(() => {
+            if(data || error){
+                clearAuthState()(authDispatch)
+            }
+        }, [data, error])
+    )
 
     const onChange = ({ name, value }) => {
         setForm({ ...form, [name]: value });
@@ -76,14 +90,25 @@ export default Signup = (props) => {
                 return { ...prev, password: 'Please add a password' }
             })
         }
+
+        if (
+            Object.values(form).length === 5 &&
+            Object.values(form).every(item => item.trim().length > 0) &&
+            Object.values(errors).every(item => !item)
+        ) {
+            register(form)(authDispatch);
+        }
     };
     return (
         <SignupComponent
             form={form}
-            errors={erros}
+            errors={errors}
             onSubmit={onSubmit}
             onChange={onChange}
+            error={error}
+            loading={loading}
             {...props}
+            
         />
     )
 };

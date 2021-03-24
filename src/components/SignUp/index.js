@@ -7,7 +7,15 @@ import { LOGIN } from '../../constants/routeNames';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 
-export default SignupComponent = ({ onSubmit, onChange, errors, form }) => {
+export default SignupComponent = ({
+    onSubmit,
+    onChange,
+    errors,
+    form,
+    error,
+    loading
+    
+}) => {
     const navigation = useNavigation();
     return (
         <Container>
@@ -25,11 +33,13 @@ export default SignupComponent = ({ onSubmit, onChange, errors, form }) => {
 
 
                 <View style={styles.form}>
+
+                    {error?.error && <Text>{error.error}</Text>}
                     <Input
                         lable="Username"
                         iconPosition="right"
                         placeholder="Enter Username"
-                        error={errors.userName}
+                        error={errors.userName || error?.username?.[0]}
                         onChangeText={(value) => {
                             onChange({ name: 'userName', value })
                         }}
@@ -43,14 +53,14 @@ export default SignupComponent = ({ onSubmit, onChange, errors, form }) => {
                         onChangeText={(value) => {
                             onChange({ name: 'firstName', value })
                         }}
-                        error={errors.firstName}
+                        error={errors.firstName || error?.first_name?.[0]}
                     />
 
                     <Input
                         lable="Last name"
                         iconPosition="right"
                         placeholder="Enter Last name"
-                        error={errors.lastName}
+                        error={errors.lastName || error?.last_name?.[0]}
                         onChangeText={(value) => {
                             onChange({ name: 'lastName', value })
                         }}
@@ -60,7 +70,7 @@ export default SignupComponent = ({ onSubmit, onChange, errors, form }) => {
                         lable="Email"
                         iconPosition="right"
                         placeholder="Enter Email"
-                        error={errors.email}
+                        error={errors.email || error?.email?.[0]}
                         onChangeText={(value) => {
                             onChange({ name: 'email', value })
                         }}
@@ -72,19 +82,18 @@ export default SignupComponent = ({ onSubmit, onChange, errors, form }) => {
                         secureTextEntry={true}
                         icon={<Text>Show</Text>}
                         iconPosition="right"
-                        error={errors.password}
+                        error={errors.password || error?.password?.[0]}
                         onChangeText={(value) => {
                             onChange({ name: 'password', value })
                         }}
 
                     />
-
-
-
                     <CustomButton
                         title="Submit"
                         primary
                         onpress={onSubmit}
+                        loading={loading}
+                        disabled={loading}
                     />
 
                     <View style={styles.createSection}>
