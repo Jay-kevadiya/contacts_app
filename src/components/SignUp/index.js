@@ -17,6 +17,7 @@ export default SignupComponent = ({
     
 }) => {
     const navigation = useNavigation();
+    // console.log('aaaaa', error)
     return (
         <Container>
             <Image
@@ -88,6 +89,7 @@ export default SignupComponent = ({
                         }}
 
                     />
+
                     <CustomButton
                         title="Submit"
                         primary

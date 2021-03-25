@@ -11,12 +11,14 @@ export default Signup = (props) => {
 
     const [form, setForm] = useState({});
     const [errors, setErrors] = useState({});
-    const {authDispatch, authR:{error, loading, data}} = useContext(GlobalContext)
-    const {navigate} = useNavigation();
+    const {authDispatch, authState:{error, loading, data}} = useContext(GlobalContext)
+    const navigation = useNavigation();
+
+
 
     useEffect(() => {
         if(data){
-            navigate(LOGIN);
+            navigation.navigate(LOGIN);
         }
     }, [data])
 

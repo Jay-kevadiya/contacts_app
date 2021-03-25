@@ -6,7 +6,7 @@ export const clearAuthState = () => dispatch => {
     dispatch({
         type: CLEAR_AUTH_STATE,
     })
-} 
+}
 
 
 export default ({
@@ -31,15 +31,16 @@ export default ({
         .then((res) => {
             dispatch({
                 type: REGISTER_SUCCESS,
-                payload: res.data
-            })
+                payload: res.data,
+            });
+
         })
         .catch((err) => {
             dispatch({
                 type: REGISTER_FAIL,
                 payload: err.response
                     ? err.response.data
-                    : { error: 'Something Went Wrong' },
-            })
+                    : { error: 'Something went wrong, try agin' },
+            });
         });
 };

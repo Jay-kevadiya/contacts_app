@@ -6,7 +6,7 @@ import AuthNavigator from './authNavigator';
 import { GlobalContext } from '../context/provider';
 
 export default AppNavContainer = () => {
-    const { authR: { isLoggedIn } } = useContext(GlobalContext);
+    const { authState: { isLoggedIn } } = useContext(GlobalContext);
     // console.log(isLoggedIn)
     return (
         <NavigationContainer>
